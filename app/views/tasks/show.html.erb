@@ -1,0 +1,27 @@
+<h1 class="mb-4">Task Details</h1>
+
+<p>
+  <strong>Title:</strong>
+  <%= @task.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @task.description %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @task.state %>
+</p>
+
+<p>
+  <strong>Deadline:</strong>
+  <%= @task.deadline %>
+</p>
+
+<%= link_to 'Backlog', change_state_task_path(@task, state: 'backlog'), method: :patch, data: { turbo_method: :patch}, class: 'btn btn-secondary' if @task.state != 'backlog' %>
+<%= link_to 'In Progress', change_state_task_path(@task, state: 'in_progress'), method: :patch, data: { turbo_method: :patch}, class: 'btn btn-warning' if @task.state != 'in_progress' %>
+<%= link_to 'Done', change_state_task_path(@task, state: 'done'), method: :patch,  data: { turbo_method: :patch}, class: 'btn btn-success' if @task.state != 'done' %>
+<%= link_to 'Edit', edit_task_path(@task), class: 'btn btn-warning' %>
+<%= link_to 'Back', tasks_path, class: 'btn btn-secondary' %>

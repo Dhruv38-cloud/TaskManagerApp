@@ -1,0 +1,14 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: rails
+  password: rails
+
+development:
+  <<: *default
+  database: task_manager_development
+
+test:
+  <<: *default
+  database: task_manager_test

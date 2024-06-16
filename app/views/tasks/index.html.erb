@@ -1,0 +1,31 @@
+<h1 class="mb-4">Tasks</h1>
+
+<%= link_to 'New Task', new_task_path, class: 'btn btn-primary mb-3' %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>State</th>
+      <th>Deadline</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.title %></td>
+        <td><%= task.description %></td>
+        <td><%= task.state %></td>
+        <td><%= task.deadline %></td>
+        <td><%= link_to 'Show', task, class: 'btn btn-info btn-sm' %></td>
+        <td><%= link_to 'Edit', edit_task_path(task), class: 'btn btn-warning btn-sm' %></td>
+        <td><%= link_to 'Destroy', task_path(task), method: :delete, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %></td>
+        <td><%= link_to 'Backlog', change_state_task_path(task, state: 'backlog'), method: :patch, data: { turbo_method: :patch}, class: 'btn btn-secondary' if task.state != 'backlog' %></td>
+        <td><%= link_to 'In Progress', change_state_task_path(task, state: 'in_progress'), method: :patch, data: { turbo_method: :patch}, class: 'btn btn-warning' if task.state != 'in_progress' %></td>
+        <td><%= link_to 'Done', change_state_task_path(task, state: 'done'), method: :patch, data: { turbo_method: :patch}, class: 'btn btn-success' if task.state != 'done' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
